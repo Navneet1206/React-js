@@ -14,3 +14,7 @@ Description: Extensions for React, React-Native and Redux in JS/TS with ES7+ syn
 Version: 4.4.3
 Publisher: dsznajder
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets
+
+
+## code -r <file_name>
+- use to change the file in vs code
