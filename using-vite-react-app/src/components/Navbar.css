@@ -1,0 +1,12 @@
+nav{
+    padding: 20px;
+    background-color: aliceblue;
+}
+ul{
+    display: flex;
+    list-style: none;
+}
+li{
+    padding: 1rem;
+
+}
