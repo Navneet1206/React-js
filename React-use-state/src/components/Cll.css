@@ -1,0 +1,35 @@
+.outer{
+    border: 1px solid aqua;
+    height: 20px;
+   width: 200px;
+   border-radius: 1rem;
+}
+.inner{
+    border-radius: 1rem;
+    background-color: aqua;
+    height: 100%;
+   width: 80%;
+}
+.content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+p{
+    margin: 20px;
+}
+
+.outer:hover{
+    border-color: #646cff;
+}
+.inner:hover{
+    border-radius: 1rem;
+    background-color:  #000cfa;
+    height: 100%;
+   width: 80%;
+   cursor: pointer;
+}
+.content:hover{
+    background-color:  #92939c;
+    border-radius: 2rem;
+}
