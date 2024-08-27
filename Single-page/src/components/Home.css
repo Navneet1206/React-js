@@ -1,0 +1,48 @@
+.outer_list {
+    display: flex;
+    list-style: none;
+    cursor: pointer;
+    
+}
+
+.list_style {
+    padding: 1rem;
+    position: relative; /* Position relative for dropdown */
+}
+
+.dropdown {
+    display: none; /* Hide the dropdown by default */
+    position: absolute; /* Position it absolutely */
+    
+ }
+
+
+.cont:hover .dropdown {
+    display: block; /* Show the dropdown on hover */
+    list-style: none;
+    position: absolute;
+    right: 0;
+    
+}
+
+.dropdown .inst {
+    padding: 0.5rem 1rem; /* Padding for dropdown items */
+    border: 1px solid #ccc; /* Border for each dropdown item */
+    margin: 0; /* Remove margin */
+    background-color: white; /* Background color for dropdown items */
+}
+
+.dropdown .inst {
+    padding: 0.5rem 1rem; /* Padding for dropdown items */
+    border: 1px solid #ccc; /* Border for each dropdown item */
+    margin: 0; /* Remove margin */
+    background-color: white; /* Background color for dropdown items */
+}
+
+.dropdown .inst:not(:last-child) {
+    border-bottom: none; /* Remove bottom border for the last item */
+}
+
+.dropdown .inst:hover {
+    background-color: #f0f0f0; /* Optional hover effect */
+}

@@ -1,0 +1,20 @@
+.nav__bar {
+    display: flex; /* Use flexbox for the navbar */
+    justify-content: flex-end; /* Align items to the right */
+    padding: 1rem; /* Add some padding for better spacing */
+    background-color: antiquewhite;
+}
+
+.unoreder__list {
+    display: flex;
+    list-style: none;
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+.textdec {
+    text-decoration: none;
+    padding: 0 2rem; /* Add horizontal padding for spacing */
+    color: black; /* Change text color to white for visibility */
+}
+
