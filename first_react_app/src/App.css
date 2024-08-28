@@ -1,8 +1,10 @@
 .App {
   text-align: center;
-  margin-top: 40vh;
-}
 
+}
+ul{
+  list-style: none;
+}
 
 .btn {
   margin: 1rem;
