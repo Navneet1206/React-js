@@ -19,10 +19,34 @@ const SignUp = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log(formData);
+        // Check if passwords match
+        if (formData.newPassword !== formData.confirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/api/alumni/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data.message);
+                // Redirect or show success message
+            } else {
+                console.error(data.error);
+                // Show error message
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (

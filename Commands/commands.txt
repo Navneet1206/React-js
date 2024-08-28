@@ -1,0 +1,247 @@
+src/App.jsx
+
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Services from './components/Services';
+import SignIn from './components/SignIn';
+import SignUp from './components/SignUp';
+
+const App = () => {
+    return (
+        <Router>
+            <Main />
+        </Router>
+    );
+};
+
+const Main = () => {
+    const location = useLocation();
+    const isAuthPage = location.pathname === '/signin' || location.pathname === '/signup';
+
+    return (
+        <div>
+            {!isAuthPage && <Navbar />}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/signin" element={<SignIn />} />
+            </Routes>
+        </div>
+    );
+};
+
+export default App;
+
+
+Componets/About.jsx
+
+import React from 'react';
+import "./About.css"
+const About = () => {
+    return (
+        <div>
+            <h1>About Content</h1>
+        </div>
+    );
+};
+
+export default About;
+
+
+Componets/Home.jsx
+import React from "react";
+import "./Home.css";
+
+const Home = () => {
+  return (
+    <div>
+      <ul className="outer_list">
+        <li className="list_style cont">
+          Electronics
+          <ul className="dropdown">
+            <li className="inst">Mobile</li>
+            <li className="inst">Tablets</li>
+            <li className="inst">Laptops</li>
+          </ul>
+        </li>
+        <li className="list_style cont">Cloth
+        <ul className="dropdown">
+            <li className="inst">Male</li>
+            <li className="inst">Female</li>
+            <li className="inst">Child</li>
+          </ul>
+        </li>
+        <li className="list_style cont">Laptops
+        <ul className="dropdown">
+            <li className="inst">Dell</li>
+            <li className="inst">HP</li>
+            <li className="inst">Lenevo</li>
+            <li className="inst">MSI</li>
+            <li className="inst">ROG</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  );
+};
+
+export default Home;
+
+
+Componets/Navbar.jsx
+import React from 'react';
+import "./Navbar.css"
+import { Link } from 'react-router-dom';
+
+const Navbar = () => {
+    return (
+        <nav>
+            <div className='nav__bar'>
+            <ul className='unoreder__list'>
+                <li><Link className='textdec' to="/">Home</Link></li>
+                <li><Link className='textdec' to="/about">About</Link></li>
+                <li><Link className='textdec' to="/services">Services</Link></li>
+                <li><Link className='textdec' to="/signup">SignUp/SignIn</Link></li>
+            </ul>
+            </div>
+        </nav>
+    );
+};
+
+export default Navbar;
+
+
+
+Componets/Services.jsx
+import React from 'react';
+import "./Services.css";
+const Services = () => {
+    return (
+        <div>
+            <h1>Service Content</h1>
+        </div>
+    );
+};
+
+export default Services;
+
+
+
+Componets/Signin.jsx.jsx
+import React from 'react';
+import { Link } from 'react-router-dom';
+const SignIn = () => {
+    return (
+        <div className="auth-page">
+            <h1>Sign In</h1>
+            {/* Sign In form goes here */}
+            
+            <p>register<Link to="/signup">SignUp</Link></p>
+        </div>
+    );
+};
+
+export default SignIn;
+
+
+Componets/SignUp.jsx
+import React, { useState } from 'react';
+import "./SignUp.css";
+import { Link } from 'react-router-dom';
+
+const SignUp = () => {
+    const [formData, setFormData] = useState({
+        alumniName: '',
+        passoutYear: '',
+        email: '',
+        newPassword: '',
+        confirmPassword: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic here
+        console.log(formData);
+    };
+
+    return (
+        <div className="auth-page">
+            <h1>Sign Up</h1>
+            <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label htmlFor="alumniName">Alumni Name</label>
+                    <input
+                        type="text"
+                        id="alumniName"
+                        name="alumniName"
+                        value={formData.alumniName}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="passoutYear">Passout Year</label>
+                    <input
+                        type="number"
+                        id="passoutYear"
+                        name="passoutYear"
+                        value={formData.passoutYear}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="newPassword">New Password</label>
+                    <input
+                        type="password"
+                        id="newPassword"
+                        name="newPassword"
+                        value={formData.newPassword}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="confirmPassword">Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <button type="submit" className="btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <Link to="/signin">Sign In</Link></p>
+        </div>
+    );
+};
+
+export default SignUp;
+
