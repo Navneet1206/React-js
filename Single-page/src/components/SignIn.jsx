@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import "./SignIn.css"; // Create a separate CSS file for styling
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import "./SignIn.css";
 
 const SignIn = () => {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [loading, setLoading] = useState(false);
+    
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -14,10 +19,15 @@ const SignIn = () => {
             ...formData,
             [name]: value
         });
+        setErrorMessage(''); // Clear error message on input change
+        setSuccessMessage(''); // Clear success message on input change
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+        setErrorMessage('');
+        setSuccessMessage('');
 
         try {
             const response = await fetch('http://localhost:5000/api/alumni/signin', {
@@ -29,16 +39,17 @@ const SignIn = () => {
             });
 
             const data = await response.json();
+            setLoading(false);
+
             if (response.ok) {
-                console.log(data.message);
-                // Redirect or show success message
-                // For example, you can redirect to a dashboard or home page
+                setSuccessMessage(data.message || "Sign In successful!");
+                navigate('/app'); // Change '/app' to the route you want to navigate to
             } else {
-                console.error(data.error);
-                // Show error message
-                alert(data.error || "Sign In failed!");
+                setErrorMessage(data.error || "Sign In failed!");
             }
         } catch (error) {
+            setLoading(false);
+            setErrorMessage('An error occurred. Please try again.');
             console.error('Error:', error);
         }
     };
@@ -69,8 +80,12 @@ const SignIn = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="btn">Sign In</button>
+                <button type="submit" className="btn" disabled={loading}>
+                    {loading ? 'Signing In...' : 'Sign In'}
+                </button>
             </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+            {successMessage && <p className="success-message">{successMessage}</p>}
             <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
         </div>
     );

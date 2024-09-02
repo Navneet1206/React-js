@@ -26,7 +26,7 @@ const SignUp = () => {
             alert("Passwords do not match!");
             return;
         }
-
+    
         try {
             const response = await fetch('http://localhost:5000/api/alumni/signup', {
                 method: 'POST',
@@ -35,19 +35,22 @@ const SignUp = () => {
                 },
                 body: JSON.stringify(formData),
             });
-
+    
             const data = await response.json();
             if (response.ok) {
                 console.log(data.message);
                 // Redirect or show success message
+                alert('Sign up successful!'); // Example success message
             } else {
                 console.error(data.error);
-                // Show error message
+                alert(data.error); // Show error message from the server
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('An error occurred. Please try again.'); // General error message
         }
     };
+    
 
     return (
         <div className="auth-page">
